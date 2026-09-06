@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Renda Passiva com Criptomoedas - Guia Prático de Staking, Lending e DeFi</title>
+  <meta name="description" content="Aprenda do zero e em português simples como funcionam Staking, Lending e DeFi sem promessas milagrosas." />
+  
+  <!-- Fontes do Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* VARIABLES & RESET */
+    :root {
+      --bg-dark: #0a0e17;
+      --bg-card: #131b2e;
+      --bg-card-hover: #1a243d;
+      --primary: #00e599;
+      --primary-hover: #00b377;
+      --text-main: #f0f4f8;
+      --text-muted: #94a3b8;
+      --border-color: #1e293b;
+      --accent-yellow: #fbbf24;
+      --danger: #f87171;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* UTILITY CLASSES */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      width: 100%;
+      background-color: var(--primary);
+      color: #04100c;
+      font-weight: 800;
+      font-size: 1.15rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 20px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(0, 229, 153, 0.3);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(0, 229, 153, 0.4);
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(0, 229, 153, 0.1);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 50px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.25;
+      color: #ffffff;
+      margin-bottom: 15px;
+    }
+
+    h1 { font-size: 2.2rem; font-weight: 800; }
+    h2 { font-size: 1.8rem; font-weight: 700; text-align: center; margin-bottom: 30px; }
+    h3 { font-size: 1.25rem; font-weight: 600; }
+
+    p { color: var(--text-muted); margin-bottom: 15px; }
+
+    section {
+      padding: 60px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 1. HERO SECTION */
+    .hero {
+      text-align: center;
+      padding: 80px 0 60px;
+    }
+
+    .hero p.subheadline {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 35px;
+      max-width: 750px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* 2. PAIN SECTION */
+    .pain-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .card-pain {
+      background: var(--bg-card);
+      border-left: 4px solid var(--danger);
+      padding: 25px;
+      border-radius: 8px;
+    }
+
+    .card-pain h3 {
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    /* 3. SOLUTION SECTION */
+    .solution-box {
+      background: linear-gradient(180deg, var(--bg-card) 0%, rgba(19, 27, 46, 0.5) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 40px 30px;
+      margin-top: 20px;
+    }
+
+    .check-list {
+      list-style: none;
+      margin-top: 25px;
+    }
+
+    .check-list li {
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 15px;
+      color: var(--text-main);
+      font-size: 1.05rem;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    /* 4. MODULES SECTION */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .module-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 25px;
+      transition: border-color 0.2s ease;
+    }
+
+    .module-card:hover {
+      border-color: var(--primary);
+    }
+
+    .module-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .bonus-card {
+      background: var(--bg-card);
+      border: 1px dashed var(--accent-yellow);
+      border-radius: 10px;
+      padding: 25px;
+      margin-top: 20px;
+    }
+
+    .bonus-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-yellow);
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    /* 5. FAQ SECTION */
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px 25px;
+      margin-bottom: 15px;
+    }
+
+    .faq-item h3 {
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    /* 6. GUARANTEE SECTION */
+    .guarantee-box {
+      text-align: center;
+      background: rgba(0, 229, 153, 0.03);
+      border: 1px solid var(--primary);
+      border-radius: 12px;
+      padding: 40px 20px;
+      margin: 40px 0;
+    }
+
+    .guarantee-icon {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    /* 7. OFFER SECTION */
+    .pricing-box {
+      background: var(--bg-card);
+      border: 2px solid var(--primary);
+      border-radius: 16px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0, 229, 153, 0.15);
+    }
+
+    .price-old {
+      text-decoration: line-through;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .price-current {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 10px 0 20px;
+    }
+
+    .features-mini {
+      list-style: none;
+      text-align: left;
+      margin: 25px 0;
+    }
+
+    .features-mini li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    /* 8. FOOTER */
+    footer {
+      padding: 40px 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: #06090e;
+    }
+
+    /* MEDIA QUERIES */
+    @media (min-width: 768px) {
+      h1 { font-size: 2.8rem; }
+      .pain-cards { grid-template-columns: 1fr 1fr; }
+      .modules-grid { grid-template-columns: 1fr 1fr; }
+      .btn { width: auto; min-width: 350px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. HERO SECTION -->
+  <section class="hero">
+    <div class="container">
+      <span class="badge">Guia Prático para Iniciantes</span>
+      <h1>Você Já Ouviu Falar de Staking, Lending e DeFi — Mas Ainda Não Entende Como Isso Funciona de Verdade?</h1>
+      <p class="subheadline">Aprenda, do zero e em português simples, como essas estratégias funcionam por dentro — e como se proteger dos golpes que mais destroem quem entra nesse mundo sem saber o que está fazendo.</p>
+      <a href="#oferta" class="btn">QUERO ENTENDER ANTES DE ARRISCAR MEU DINHEIRO</a>
+    </div>
+  </section>
+
+  <!-- 2. AGITAÇÃO DA DOR -->
+  <section>
+    <div class="container">
+      <h2>Se alguma dessas frases já passou pela sua cabeça, esse guia foi feito pra você:</h2>
+      <div class="pain-cards">
+        <div class="card-pain">
+          <h3>"Todo conteúdo parece que foi escrito para quem já é programador."</h3>
+          <p>Termos em inglês, gráficos complicados, ninguém explica do começo. Você fecha a aba mais confuso do que abriu.</p>
+        </div>
+        <div class="card-pain">
+          <h3>"Tenho medo de cair em golpe e só descobrir depois."</h3>
+          <p>Você já ouviu falar de gente que perdeu tudo numa plataforma que "sumiu do nada", ou que teve a carteira esvaziada por clicar num link errado.</p>
+        </div>
+        <div class="card-pain">
+          <h3>"Não sei diferenciar o que é sério do que é aventura."</h3>
+          <p>Existem protocolos sólidos e existem armadilhas disfarçadas de oportunidade. Sem entender a lógica por trás, é impossível saber a diferença.</p>
+        </div>
+        <div class="card-pain">
+          <h3>"Já tentei entender sozinho e desisti no meio do caminho."</h3>
+          <p>Vídeos técnicos demais, artigos em inglês, fóruns cheios de jargões que você nunca ouviu falar.</p>
+        </div>
+      </div>
+      <p style="text-align: center; margin-top: 30px; font-size: 1.1rem; color: var(--text-main);">
+        Se você se identificou com pelo menos uma dessas frases, o problema nunca foi você — foi a forma como esse assunto costuma ser explicado.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. APRESENTAÇÃO DA SOLUÇÃO -->
+  <section>
+    <div class="container">
+      <h2>Conheça o "Renda Passiva com Criptomoedas"</h2>
+      <p style="text-align: center; max-width: 700px; margin: 0 auto 30px;">Um guia direto ao ponto, escrito em português simples, sem jargão técnico sem explicação — e sem nenhuma promessa de ganho fácil.</p>
+      
+      <div class="solution-box">
+        <h3 style="text-align: center;">Aqui você vai entender, de forma clara:</h3>
+        <ul class="check-list">
+          <li>Como funcionam de verdade o Staking, o Lending e as Pools de Liquidez;</li>
+          <li>Por que existe risco em cada uma dessas estratégias — e como reduzir esse risco;</li>
+          <li>Como identificar os golpes mais comuns antes que eles cheguem até você;</li>
+          <li>Passo a passo prático para começar com segurança, sem depender de ninguém explicando "aquele termo estranho" de novo.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. CONTEÚDO E MÓDULOS -->
+  <section>
+    <div class="container">
+      <h2>O que você vai encontrar dentro do guia</h2>
+      
+      <div class="modules-grid">
+        <div class="module-card">
+          <span class="module-tag">Módulo 1</span>
+          <h3>O Que É DeFi e Como Funciona</h3>
+          <p>Entenda, com uma linguagem simples, como o dinheiro pode "trabalhar" sem depender de um banco tradicional.</p>
+        </div>
+
+        <div class="module-card">
+          <span class="module-tag">Módulo 2</span>
+          <h3>Staking: Deixando Suas Cripto Renderem</h3>
+          <p>O passo a passo para participar com segurança, e os erros que fazem gente perder parte do valor sem entender o porquê.</p>
+        </div>
+
+        <div class="module-card">
+          <span class="module-tag">Módulo 3</span>
+          <h3>Lending: Emprestando Cripto e Recebendo Juros</h3>
+          <p>Como plataformas de empréstimo realmente funcionam, e o mecanismo que protege (ou não) quem participa.</p>
+        </div>
+
+        <div class="module-card">
+          <span class="module-tag">Módulo 4</span>
+          <h3>Pools de Liquidez e Yield Farming</h3>
+          <p>O conceito mais mal-entendido do setor, explicado com exemplo numérico simples, sem enrolação.</p>
+        </div>
+
+        <div class="module-card" style="grid-column: 1 / -1;">
+          <span class="module-tag">Módulo 5</span>
+          <h3>Guia Prático de Segurança e Gestão de Riscos</h3>
+          <p>Como proteger sua carteira, reconhecer golpes e nunca cair em phishing, airdrops falsos ou links maliciosos.</p>
+        </div>
+      </div>
+
+      <!-- BÔNUS INCLUSOS -->
+      <h2 style="margin-top: 50px;">3 Bônus Exclusivos Inclusos</h2>
+      
+      <div class="bonus-card">
+        <span class="bonus-tag">Bônus #1</span>
+        <h3>Checklist Diário e Mensal</h3>
+        <p>Uma rotina prática de menos de 10 minutos para acompanhar tudo sem virar refém da tela do computador.</p>
+      </div>
+
+      <div class="bonus-card">
+        <span class="bonus-tag">Bônus #2</span>
+        <h3>Glossário DeFi de A a Z</h3>
+        <p>Todos os termos técnicos (APY, TVL, Slippage, Smart Contract, etc.), traduzidos em uma frase simples cada.</p>
+      </div>
+
+      <div class="bonus-card">
+        <span class="bonus-tag">Bônus #3</span>
+        <h3>Guia de Ferramentas Gratuitas</h3>
+        <p>As ferramentas reais e seguras (DefiLlama, CoinGecko, Etherscan) que profissionais usam para analisar protocolos antes de participar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. PERGUNTAS FREQUENTES (FAQ) -->
+  <section>
+    <div class="container">
+      <h2>Ainda com dúvida? Provavelmente ela está aqui:</h2>
+
+      <div class="faq-item">
+        <h3>Isso é golpe ou pirâmide?</h3>
+        <p>Não. Este é um material educacional sobre como protocolos reais de DeFi funcionam — incluindo um módulo inteiro dedicado a te ensinar a reconhecer golpes e pirâmides no setor. Não vendemos "investimento", vendemos entendimento.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Vocês garantem que eu vou ganhar dinheiro com isso?</h3>
+        <p>Não, e desconfie de qualquer material que garanta isso. Criptomoedas envolvem risco real, inclusive risco de perda. Este guia existe justamente para te ensinar a participar com mais consciência técnica — não para prometer resultado financeiro.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Preciso entender de tecnologia ou programação?</h3>
+        <p>Não. O material foi escrito para quem nunca teve contato com o assunto, com analogias do dia a dia para cada termo técnico.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Funciona para quem nunca comprou criptomoedas?</h3>
+        <p>Sim. O Módulo 1 parte do zero absoluto, explicando os conceitos fundamentais antes de qualquer passo prático.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>E se eu comprar e achar que não é pra mim?</h3>
+        <p>Você tem 7 dias de garantia incondicional. Se não fizer sentido pra você, é só pedir o reembolso dentro do prazo, sem burocracia.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Como recebo o material depois da compra?</h3>
+        <p>A entrega é imediata e automática! Assim que o pagamento for confirmado, você receberá um e-mail com o link direto para baixar seu E-book em PDF.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. OFERTA & GARANTIA -->
+  <section id="oferta">
+    <div class="container">
+      
+      <div class="guarantee-box">
+        <div class="guarantee-icon">🛡️</div>
+        <h3>Risco Zero para Você Experimentar</h3>
+        <p>Você tem <strong>7 dias de garantia incondicional</strong> a partir da compra. Se por qualquer motivo o conteúdo não for pra você, é só solicitar o reembolso na plataforma de pagamento — sem perguntas, sem burocracia.</p>
+      </div>
+
+      <div class="pricing-box">
+        <h2>Renda Passiva com Criptomoedas</h2>
+        <span class="price-old">De R$ 97,00</span>
+        <div class="price-current">R$ 47,00</div>
+        <p style="color: var(--primary); font-size: 0.9rem; font-weight: 600;">OU EM ATÉ 5X NO CARTÃO</p>
+
+        <ul class="features-mini">
+          <li>✔ Guia completo em PDF (17 páginas)</li>
+          <li>✔ Linguagem simples, direto ao ponto</li>
+          <li>✔ 5 Módulos práticos completos</li>
+          <li>✔ Bônus 1: Checklist de Rotina</li>
+          <li>✔ Bônus 2: Glossário DeFi A a Z</li>
+          <li>✔ Bônus 3: Guia de Ferramentas</li>
+          <li>✔ 7 Dias de Garantia Incondicional</li>
+        </ul>
+
+        <a href="[SUA_LINK_DE_CHECKOUT]" class="btn">QUERO MEU ACESSO AGORA</a>
+        
+        <p style="font-size: 0.8rem; margin-top: 15px; color: var(--text-muted);">
+          🔒 Compra 100% Segura • Acesso Imediato
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. RODAPÉ LEGAL -->
+  <footer>
+    <div class="container">
+      <p>Este produto é um material educacional sobre o funcionamento de tecnologias de finanças descentralizadas (DeFi). Não constitui recomendação de investimento, consultoria financeira ou promessa de rendimento. Criptomoedas são ativos de alta volatilidade e envolvem risco de perda parcial ou total do capital investido. Rendimentos passados ou exemplos numéricos citados no material têm finalidade exclusivamente didática e não representam garantia de resultados futuros.</p>
+      <p style="margin-top: 20px;">© 2026 Tawan Oliveira. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
