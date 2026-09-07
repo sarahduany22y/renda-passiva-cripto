@@ -133,6 +133,22 @@
       display: block;
     }
 
+    /* CAPA EBOOK */
+    .ebook-cover-box {
+      text-align: center;
+      margin: 35px auto;
+      max-width: 380px;
+      padding: 0 15px;
+    }
+
+    .ebook-cover-box img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+      border: 1px solid var(--border-color);
+    }
+
     /* 2. PAIN SECTION */
     .pain-cards {
       display: grid;
@@ -302,9 +318,9 @@
       color: var(--text-main);
     }
 
-    /* 9. FOOTER */
+    /* 9. FOOTER CLEAN */
     footer {
-      padding: 40px 0;
+      padding: 30px 0;
       text-align: center;
       font-size: 0.85rem;
       color: var(--text-muted);
@@ -326,12 +342,12 @@
   <section class="hero">
     <div class="container">
       <span class="badge">Guia Prático para Iniciantes</span>
-      <h1>Você Já Ouviu Falar de Staking, Lending e DeFi - Mas Ainda Não Entende Como Isso Funciona de Verdade?</h1>
-      <p class="subheadline">Aprenda, do zero e em português simples, a lógica técnica por trás dessas ferramentas - e como se proteger dos golpes mais comuns no mercado cripto.</p>
+      <h1>Você Já Ouviu Falar de Staking, Lending e DeFi — Mas Ainda Não Entende Como Isso Funciona de Verdade?</h1>
+      <p class="subheadline">Aprenda, do zero e em português simples, a lógica técnica por trás dessas ferramentas — e como se proteger dos golpes mais comuns no mercado cripto.</p>
       
-      <!-- PLAYER DE VÍDEO LOCAL (video1.mp4) -->
+      <!-- PLAYER DE VÍDEO LOCAL (MUDO E PAUSADO) -->
       <div class="video-wrapper">
-        <video controls playsinline preload="metadata">
+        <video controls muted playsinline preload="metadata">
           <source src="video1.mp4" type="video/mp4">
           Seu navegador não suporta a reprodução deste vídeo.
         </video>
@@ -366,12 +382,17 @@
     </div>
   </section>
 
-  <!-- 3. APRESENTAÇÃO DA SOLUÇÃO -->
+  <!-- 3. APRESENTAÇÃO DA SOLUÇÃO COM CAPA DO EBOOK -->
   <section>
     <div class="container">
       <h2>Conheça o E-book "Renda Passiva com Criptomoedas"</h2>
-      <p style="text-align: center; max-width: 700px; margin: 0 auto 30px;">Um guia direto ao ponto, focado no funcionamento real do ecossistema DeFi, sem promessas de ganhos fáceis ou irreais.</p>
+      <p style="text-align: center; max-width: 700px; margin: 0 auto 10px;">Um guia direto ao ponto, focado no funcionamento real do ecossistema DeFi, sem promessas de ganhos fáceis ou irreais.</p>
       
+      <!-- FOTO DA CAPA DO E-BOOK -->
+      <div class="ebook-cover-box">
+        <img src="capa-ebook.jpg" alt="Capa do E-book Renda Passiva com Criptomoedas">
+      </div>
+
       <div class="solution-box">
         <h3 style="text-align: center;">O que você vai compreender com clareza:</h3>
         <ul class="check-list">
@@ -479,7 +500,7 @@
 
       <div class="faq-item">
         <h3>Como recebo o acesso ao e-book?</h3>
-        <p>O envio é automático após a confirmação do pagamento. Você receberá o e-book principal em PDF junto com os materiais complementares no seu e-mail cadastrado.</p>
+        <p>O envio é automático após a confirmação do pagamento. Você será redirecionado para a página de download com acesso imediato ao material.</p>
       </div>
 
       <div class="faq-item">
@@ -525,11 +546,11 @@
     </div>
   </section>
 
-  <!-- 8. RODAPÉ LEGAL -->
+  <!-- 8. RODAPÉ LIMPO -->
   <footer>
     <div class="container">
-      <p>Este produto é um material puramente educacional sobre o funcionamento de finanças descentralizadas (DeFi). Não constitui recomendação de investimento, consultoria financeira ou promessa de rendimento. O mercado de criptomoedas é volátil e envolve riscos operacionais e de capital.</p>
-      <p style="margin-top: 20px;">© 2026 Tawan Oliveira. Todos os direitos reservados.</p>
+      <p>Este produto é um material puramente educacional sobre o funcionamento de finanças descentralizadas (DeFi). Não constitui recomendação de investimento, consultoria financeira ou promessa de rendimento.</p>
+      <p style="margin-top: 15px;">© 2026 Tawan Oliveira. Todos os direitos reservados.</p>
     </div>
   </footer>
 
